@@ -7,6 +7,7 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = Book.all
+    
   end
 
   def show
@@ -21,9 +22,15 @@ class BooksController < ApplicationController
     @book.save
     @user = current_user
     @books = Book.all
+     flash[:notice]="successfully"
     redirect_to book_path(@book.id)
   end
 
+  def update
+    
+   flash[:notice]="successfully"
+  end
+  
 private
 
   def book_params

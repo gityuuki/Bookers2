@@ -16,7 +16,7 @@
 
   <body>
     <header>
-      
+
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/"><span>Bookers</span></a>
@@ -25,62 +25,66 @@
       </button>
       <div class="navbar-collapse collapse show" id="navbarNavDropdown" style="">
         <ul class="navbar-nav ml-auto">
-          <li>
-            <a class="nav-link text-light" href="/users/121864">
-              <i class="fas fa-home" aria-hidden="true"></i> Home
-</a>          </li>
-          <li>
-            <a class="nav-link text-light" href="/users">
-              <i class="fas fa-users" aria-hidden="true"></i> Users
-</a>          </li>
-          <li>
-            <a class="nav-link text-light" href="/books">
-              <i class="fas fa-book-open" aria-hidden="true"></i> Books
-</a>          </li>
-          <li>
-            <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out">
-              <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log out
-</a>          </li>
+
+        <% if user_signed_in? %>
+      <li>
+        <%= link_to user_path(current_user), class:"nav-link text-light" do %>
+        <i class="fas fa-home" aria-hidden="true"></i>Home
+        <% end %>
+      </li>
+       <li>
+        <%= link_to users_path, class:"nav-link text-light" do %>
+        <i class="fas fa-users" aria-hidden="true"></i>Users
+        <% end %>
+      </li>
+       <li>
+        <%= link_to books_path, class:"nav-link text-light" do %>
+        <i class="fas fa-book-open" aria-hidden="true"></i>Books
+        <% end %>
+      </li>
+       <li>
+        <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-light" do %>
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Log out
+        <% end %>
+      </li>
+    <% else %>
+        <li>
+        <%= link_to root_path, class:"nav-link text-light" do %>
+        <i class="fas fa-home" aria-hidden="true"></i>Home
+        <% end %>
+      </li>
+       <li>
+        <%= link_to about_path, class:"nav-link text-light" do %>
+        <i class="fas fa-link" aria-hidden="true"></i> About
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_user_registration_path, class:"nav-link text-light" do %>
+              <i class="fas fa-user-plus" aria-hidden="true"></i> Sign up
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_user_session_path, class:"nav-link text-light" do %>
+              <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Log in
+        <% end %>
+      </li>
+    <% end %>
+
         </ul>
       </div>
     </div>
   </nav>
-      
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "Home", root_path, class:"nav-link" %>
-      </li>
-       <li>
-        <%= link_to "Users", users_path %>
-      </li>
-       <li>
-        <%= link_to "Books", books_path %>
-      </li>
-       <li>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-        <li>
-        <%= link_to "Home", root_path %>
-      </li>
-       <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "Log in", new_user_session_path %>
-      </li>
-    <% end %>
+
+
   </header>
+    <p class="notice"><%= notice %></p>
     <main>
     <%= yield %>
     </main>
+    <br><br>
     <footer>
       CopyRight Infratop.inc
     </footer>
-
   </body>
 </html>
 
